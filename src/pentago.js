@@ -14,11 +14,11 @@ class Pentago {
         let rows = 6;
         let cols = 6;
 
-        this.circleRad = 100;
+        this.circleRad = 100/2;
         this.circleGap = this.width / 6;
 
         //initialise empty board
-        this.board = [...Array(rows)].map(e => Array(cols).fill(0));  //3D array, first array is quadrants, which each has rows, which each has columns.
+        this.board = [...Array(rows)].map(e => Array(cols).fill(0)); //3D array, first array is quadrants, which each has rows, which each has columns.
         /**
          * Quadrants v
          *  ___________
@@ -43,25 +43,32 @@ class Pentago {
         strokeWeight(1);
 
         noFill();
-        rect(0, 0, this.width - 1, this.width - 1);//draws outer rectangle , subtracting stroke weight
-        line(0, this.width / 2, this.width, this.width / 2);//horizontal line
-        line(this.width / 2, 0, this.width / 2, this.width);//vetical line
+        rect(0, 0, this.width - 1, this.width - 1); //draws outer rectangle , subtracting stroke weight
+        line(0, this.width / 2, this.width, this.width / 2); //horizontal line
+        line(this.width / 2, 0, this.width / 2, this.width); //vetical line
 
         //draw circles
         ellipseMode(CENTER);
         for (let i = 0; i < 6; i++) {
             for (let j = 0; j < 6; j++) {
+                let circleCenterX = i * this.circleGap + this.circleGap / 2;
+                let circleCenterY = j * this.circleGap + this.circleGap / 2;
                 //white is one, black is two
+                strokeWeight(1);
+                stroke(0,0,0);
                 if (this.board[j][i] == 1) {
                     fill(255, 255, 255);
-                }
-                else if (this.board[j][i] == 2) {
+                } else if (this.board[j][i] == 2) {
                     fill(0, 0, 0);
-                }
-                else {
+                } else if (Math.sqrt((mouseY - circleCenterY) ** 2 + (mouseX - circleCenterX) ** 2) < this.circleRad) {
+                    noFill();
+                    stroke(255, 255, 255);
+                    strokeWeight(5);
+                    ellipse(circleCenterX, circleCenterY, 2*this.circleRad - 5, 2*this.circleRad - 5);
+                } else {
                     noFill();
                 }
-                ellipse(i * this.circleGap + this.circleGap / 2, j * this.circleGap + this.circleGap / 2, this.circleRad, this.circleRad);
+                ellipse(circleCenterX, circleCenterY, 2*this.circleRad, 2*this.circleRad);
             }
         }
     }
@@ -110,8 +117,7 @@ class Pentago {
             });
             console.log(quadrant);
             this.setQuadrant(quad, quadrant);
-        }
-        else if (clockwise !== true) {
+        } else if (clockwise !== true) {
             quadrant.forEach(array => {
                 array = array.reverse()
             });
