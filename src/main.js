@@ -11,8 +11,8 @@ let clockwise_button, anticlockwise_button, text;
 
 function setup() {
     console.log("nice");
-    createCanvas(WIDTH, HEIGHT);
-
+    let canv = createCanvas(WIDTH, HEIGHT);
+    canv.position(50,50);
     clockwise_button = createButton("Clockwise");
     clockwise_button.position(WIDTH + 50, 50);
     clockwise_button.mousePressed(function() {
