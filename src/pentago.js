@@ -10,11 +10,10 @@ class Pentago {
         this.y = y;
         this.width = width;
 
-        let quadrants = 4;
         let rows = 6;
         let cols = 6;
 
-        this.circleRad = 100/2;
+        this.circleRad = 100 / 2;
         this.circleGap = this.width / 6;
 
         //initialise empty board
@@ -30,9 +29,9 @@ class Pentago {
          */
 
         //ROW, COL
-        this.board[1][0] = 1;
-        this.board[0][0] = 1;
-        this.board[4][2] = 2;
+        // this.board[1][0] = 1;
+        // this.board[0][0] = 1;
+        // this.board[4][2] = 2;
         console.log(this.board);
     }
 
@@ -53,24 +52,81 @@ class Pentago {
             for (let j = 0; j < 6; j++) {
                 let circleCenterX = i * this.circleGap + this.circleGap / 2;
                 let circleCenterY = j * this.circleGap + this.circleGap / 2;
-                //white is one, black is two
+
+
                 strokeWeight(1);
-                stroke(0,0,0);
+                stroke(0, 0, 0);
                 if (this.board[j][i] == 1) {
                     fill(255, 255, 255);
                 } else if (this.board[j][i] == 2) {
                     fill(0, 0, 0);
-                } else if (Math.sqrt((mouseY - circleCenterY) ** 2 + (mouseX - circleCenterX) ** 2) < this.circleRad) {
+                } else if (played == false && Math.sqrt((mouseY - circleCenterY) ** 2 + (mouseX - circleCenterX) ** 2) < this.circleRad) {
                     noFill();
-                    stroke(255, 255, 255);
+                    if (player == 1) {
+                        stroke(255, 255, 255);
+                    } else if (player == 2) {
+                        stroke(0, 0, 0);
+                    }
                     strokeWeight(5);
-                    ellipse(circleCenterX, circleCenterY, 2*this.circleRad - 5, 2*this.circleRad - 5);
+                    if (played == false) {
+                        ellipse(circleCenterX, circleCenterY, 2 * this.circleRad - 5 - 2, 2 * this.circleRad - 5 - 2);
+                    }
                 } else {
                     noFill();
                 }
-                ellipse(circleCenterX, circleCenterY, 2*this.circleRad, 2*this.circleRad);
+                stroke(0, 0, 0);
+                strokeWeight(1);
+                ellipse(circleCenterX, circleCenterY, 2 * this.circleRad, 2 * this.circleRad);
             }
         }
+        let quadrant = quadrantSelected;
+        //if no quadrant selceted
+        //white is one, black is two
+        if (mouseX >= this.width / 2 && mouseY < this.width / 2) {
+            quadrant = 1;
+        } else if (mouseX < this.width / 2 && mouseY >= this.width / 2) {
+            quadrant = 2;
+        } else if (mouseX >= this.width / 2 && mouseY >= this.width / 2) {
+            quadrant = 3;
+        } else if (mouseX < this.width / 2 && mouseY < this.width / 2) {
+            quadrant = 0;
+        }
+
+
+        if (played == true && quadrant !== -1) {
+            noFill();
+            if (player == 1) {
+                stroke(255, 255, 255);
+            } else if (player == 2) {
+                stroke(0, 0, 0);
+            }
+            strokeWeight(5);
+            if (quadrant == 0) {
+                rect(0, 0, this.width / 2, this.width / 2);
+                if (mouseIsPressed) {
+                    quadrantSelected = 0
+                }
+            }
+            if (quadrant == 1) {
+                rect(this.width / 2, 0, this.width / 2, this.width / 2);
+                if (mouseIsPressed) {
+                    quadrantSelected = 1
+                }
+            }
+            if (quadrant == 2) {
+                rect(0, this.width / 2, this.width / 2, this.width / 2);
+                if (mouseIsPressed) {
+                    quadrantSelected = 2
+                }
+            }
+            if (quadrant == 3) {
+                rect(this.width / 2, this.width / 2, this.width / 2, this.width / 2);
+                if (mouseIsPressed) {
+                    quadrantSelected = 3
+                }
+            }
+        }
+
     }
 
     /**
@@ -155,6 +211,29 @@ class Pentago {
                 for (let j = 3; j < 6; j++) {
                     this.board[i][j] = array[i - 3][j - 3];
                 }
+            }
+        }
+    }
+
+    //gets which cirlce is at x,y, returns row, columnn OR -1
+    getCircle(x, y) {
+        for (let i = 0; i < this.board.length; i++) {
+            for (let j = 0; j < this.board[i].length; j++) {
+                let circleCenterX = i * this.circleGap + this.circleGap / 2;
+                let circleCenterY = j * this.circleGap + this.circleGap / 2;
+                if (Math.sqrt((y - circleCenterY) ** 2 + (x - circleCenterX) ** 2) < this.circleRad) {
+                    return { row: j, col: i };
+                }
+            }
+        }
+        return { row: -1, col: -1 };
+    }
+
+    makeMove(row, col, player) {
+        if (row !== -1 && col !== -1) {
+            if (this.board[row][col] == 0) {
+                this.board[row][col] = player;
+                played = true;
             }
         }
     }
