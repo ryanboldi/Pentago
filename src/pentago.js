@@ -136,7 +136,7 @@ class Pentago {
      */
     rotateQuadrant(quad, clockwise) {
         //select quadrant in question
-        let quadrant = []
+        let quadrant = -1
         if (quad == 0) {
             let rows = this.board.slice(0, 3);
             rows.forEach(col => {
@@ -166,7 +166,7 @@ class Pentago {
         //if clockwise, transpose then reverse each row
         //if anti-clockwise, reverse each row then transpose
 
-        if (clockwise) {
+        if (clockwise ) {
             quadrant = transpose(quadrant);
             quadrant.forEach(array => {
                 array = array.reverse()
