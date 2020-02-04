@@ -53,7 +53,7 @@ function mouseClicked() {
 }
 
 function transpose(a) {
-    if (a instanceof Array) {
+    if (a instanceof Array && a.length > 0) {
         return Object.keys(a[0]).map(function(c) {
             return a.map(function(r) { return r[c]; });
         });
