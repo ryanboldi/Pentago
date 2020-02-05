@@ -136,7 +136,7 @@ class Pentago {
      */
     rotateQuadrant(quad, clockwise) {
         //select quadrant in question
-        let quadrant = -1
+        let quadrant = []
         if (quad == 0) {
             let rows = this.board.slice(0, 3);
             rows.forEach(col => {

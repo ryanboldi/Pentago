@@ -7,41 +7,51 @@ let quadrantSelected = -1;
 
 let p = new Pentago(0, 0, 800, 800);
 
-let clockwise_button, anticlockwise_button, text;
+let zero_cwb, zero_awb, one_cwb, one_awb, two_cwb, two_awb, three_cwb, three_awb;
+
+function swapPlayer() {
+    if (player == 1) {
+        player = 2
+    }
+    if (player == 2) {
+        player = 1
+    }
+}
 
 function setup() {
+    zero_cwb = createButton(">");
+    zero_cwb.style('font-size', "25px");
+    zero_cwb.position(50, 10);
+    zero_cwb.mousePressed(function() {
+        p.rotateQuadrant(0, true);
+        swapPlayer();
+    });
+    zero_awb = createButton("v");
+    zero_awb.position(10, 50);
+    zero_awb.mousePressed(function() {
+        p.rotateQuadrant(0, false);
+        swapPlayer();
+    });
+
     console.log("nice");
     let canv = createCanvas(WIDTH, HEIGHT);
-    canv.position(50,50);
-    clockwise_button = createButton("Clockwise");
-    clockwise_button.position(WIDTH + 50, 50);
-    clockwise_button.mousePressed(function() {
-        p.rotateQuadrant(quadrantSelected, true)
-        played = false;
-        quadrantSelected = -1;
-        if (player == 1) { player = 2; } else if (player == 2) {
-            player = 1;
-        }
-    });
-    anticlockwise_button = createButton("Anti-clockwise");
-    anticlockwise_button.position(clockwise_button.x + clockwise_button.width + 10, 50);
-    anticlockwise_button.mousePressed(function() {
-        p.rotateQuadrant(quadrantSelected, false)
-        played = false;
-        quadrantSelected = -1;
-        if (player == 1) { player = 2; } else if (player == 2) {
-            player = 1;
-        }
-    });
-    text = createElement('h3', (quadrantSelected !== -1) ? `Which direction would you like to rotate quadrant ${quadrantSelected}?` : "You haven't selected a quadrant to rotate");
-    text.position(WIDTH + 50, 0);
+    canv.position(50, 50);
+    // function() {
+    //     p.rotateQuadrant(quadrantSelected, true)
+    //     played = false;
+    //     quadrantSelected = -1;
+    //     if (player == 1) { player = 2; } else if (player == 2) {
+    //         player = 1;
+    //     }
+    // }
+
+
+
 }
 
 function draw() {
-    text.html((quadrantSelected !== -1) ? `Which direction would you like to rotate quadrant ${quadrantSelected}?` : "You haven't selected a quadrant to rotate");
     background(200, 200, 200);
     p.show();
-
     //check for clicks
 }
 
