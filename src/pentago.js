@@ -79,53 +79,53 @@ class Pentago {
                 ellipse(circleCenterX, circleCenterY, 2 * this.circleRad, 2 * this.circleRad);
             }
         }
-        let quadrant = quadrantSelected;
-        //if no quadrant selceted
-        //white is one, black is two
-        if (mouseX >= this.width / 2 && mouseY < this.width / 2) {
-            quadrant = 1;
-        } else if (mouseX < this.width / 2 && mouseY >= this.width / 2) {
-            quadrant = 2;
-        } else if (mouseX >= this.width / 2 && mouseY >= this.width / 2) {
-            quadrant = 3;
-        } else if (mouseX < this.width / 2 && mouseY < this.width / 2) {
-            quadrant = 0;
-        }
+        // let quadrant = -1
+        // //if no quadrant selceted
+        // //white is one, black is two
+        // if (mouseX >= this.width / 2 && mouseY < this.width / 2) {
+        //     quadrant = 1;
+        // } else if (mouseX < this.width / 2 && mouseY >= this.width / 2) {
+        //     quadrant = 2;
+        // } else if (mouseX >= this.width / 2 && mouseY >= this.width / 2) {
+        //     quadrant = 3;
+        // } else if (mouseX < this.width / 2 && mouseY < this.width / 2) {
+        //     quadrant = 0;
+        // }
 
 
-        if (played == true && quadrant !== -1) {
-            noFill();
-            if (player == 1) {
-                stroke(255, 255, 255);
-            } else if (player == 2) {
-                stroke(0, 0, 0);
-            }
-            strokeWeight(5);
-            if (quadrant == 0) {
-                rect(0, 0, this.width / 2, this.width / 2);
-                if (mouseIsPressed) {
-                    quadrantSelected = 0
-                }
-            }
-            if (quadrant == 1) {
-                rect(this.width / 2, 0, this.width / 2, this.width / 2);
-                if (mouseIsPressed) {
-                    quadrantSelected = 1
-                }
-            }
-            if (quadrant == 2) {
-                rect(0, this.width / 2, this.width / 2, this.width / 2);
-                if (mouseIsPressed) {
-                    quadrantSelected = 2
-                }
-            }
-            if (quadrant == 3) {
-                rect(this.width / 2, this.width / 2, this.width / 2, this.width / 2);
-                if (mouseIsPressed) {
-                    quadrantSelected = 3
-                }
-            }
-        }
+        // if (played == true && quadrant !== -1) {
+        //     noFill();
+        //     if (player == 1) {
+        //         stroke(255, 255, 255);
+        //     } else if (player == 2) {
+        //         stroke(0, 0, 0);
+        //     }
+        //     strokeWeight(5);
+        //     if (quadrant == 0) {
+        //         rect(0, 0, this.width / 2, this.width / 2);
+        //         if (mouseIsPressed) {
+        //             quadrantSelected = 0
+        //         }
+        //     }
+        //     if (quadrant == 1) {
+        //         rect(this.width / 2, 0, this.width / 2, this.width / 2);
+        //         if (mouseIsPressed) {
+        //             quadrantSelected = 1
+        //         }
+        //     }
+        //     if (quadrant == 2) {
+        //         rect(0, this.width / 2, this.width / 2, this.width / 2);
+        //         if (mouseIsPressed) {
+        //             quadrantSelected = 2
+        //         }
+        //     }
+        //     if (quadrant == 3) {
+        //         rect(this.width / 2, this.width / 2, this.width / 2, this.width / 2);
+        //         if (mouseIsPressed) {
+        //             quadrantSelected = 3
+        //         }
+        //     }
+        // }
 
     }
 
@@ -166,7 +166,7 @@ class Pentago {
         //if clockwise, transpose then reverse each row
         //if anti-clockwise, reverse each row then transpose
 
-        if (clockwise ) {
+        if (clockwise) {
             quadrant = transpose(quadrant);
             quadrant.forEach(array => {
                 array = array.reverse()
