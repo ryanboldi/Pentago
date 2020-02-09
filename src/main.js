@@ -90,32 +90,8 @@ function setup() {
             swapPlayer();
         }
     });
-
-
-
-
-
-
-
-
-
-
-
-
-
     let canv = createCanvas(WIDTH, HEIGHT);
     canv.position(50, 50);
-    // function() {
-    //     p.rotateQuadrant(quadrantSelected, true)
-    //     played = false;
-    //     quadrantSelected = -1;
-    //     if (player == 1) { player = 2; } else if (player == 2) {
-    //         player = 1;
-    //     }
-    // }
-
-
-
 }
 
 function draw() {

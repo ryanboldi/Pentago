@@ -237,4 +237,13 @@ class Pentago {
             }
         }
     }
+
+    /*
+     * checks for win. returns winner if win, else returns -1;
+     */
+    checkWin(){
+        //find horizontal winners
+
+        
+    }
 }
