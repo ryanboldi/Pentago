@@ -54,27 +54,24 @@ function setup() {
             swapPlayer();
         }
     });
-    two_cwb = createButton(">");
-    two_cwb.style('font-size', "25px");
-    two_cwb.position(10 + 50, 50 + 800 + 10);
-    two_cwb.mousePressed(function() {
-        if (played == true) {
-            p.rotateQuadrant(3, true);
-            swapPlayer();
-        }
-    });
-    two_awb = createButton("^");
+    two_awb = createButton(">");
     two_awb.style('font-size', "25px");
-    two_awb.position(10, 50 + 800 - 50 + 10);
+    two_awb.position(10 + 50, 50 + 800 + 10);
     two_awb.mousePressed(function() {
         if (played == true) {
-            p.rotateQuadrant(3, false);
+            p.rotateQuadrant(2, false);
             swapPlayer();
         }
     });
-
-
-
+    two_cwb = createButton("^");
+    two_cwb.style('font-size', "25px");
+    two_cwb.position(10, 50 + 800 - 50 + 10);
+    two_cwb.mousePressed(function() {
+        if (played == true) {
+            p.rotateQuadrant(2, true);
+            swapPlayer();
+        }
+    });
     three_cwb = createButton("<");
     three_cwb.style('font-size', "25px");
     three_cwb.position(50 + 800 - 50 + 20, 50 + 800 + 10);
