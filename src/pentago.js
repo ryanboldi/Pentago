@@ -254,13 +254,34 @@ class Pentago {
                     vertTwo = false;
                 }
             }
-
             if (vertOne) return 1;
             if (vertTwo) return 2;
-
-            if (vert) {
-                return (1);
-            }
         }
+
+        let array = this.board;
+
+        //transpose array and do it again to find horizontal
+        array[0].map((col, i) => array.map(row => row[i]));
+
+         //find vertical winners
+         for (let i = 0; i < this.board.length; i++) {
+            let vertOne = true;
+            let vertTwo = true;
+            for (let j = 0; j < this.board[i].length; j++) {
+                if (this.board[i][j] !== 1) {
+                    vertOne = false;
+                }
+                if (this.board[i][j] !== 2) {
+                    vertTwo = false;
+                }
+            }
+            if (vertOne) return 1;
+            if (vertTwo) return 2;
+        }
+
+        //transpose back
+        this.board = array[0].map((col, i) => array.map(row => row[i]));
+
+        return -1;
     }
 }
