@@ -241,20 +241,26 @@ class Pentago {
     /*
      * checks for win. returns winner if win, else returns -1;
      */
-    checkWin(){
-        //find vertical winners one
-        for (let i = 0; i < this.board.length; i++){
+    checkWin() {
+        //find vertical winners
+        for (let i = 0; i < this.board.length; i++) {
             let vertOne = true;
             let vertTwo = true;
-            for (let j = 0; j< this.board[i].length; j++){
-                if (this.board[i][j] !== 1){
+            for (let j = 0; j < this.board[i].length; j++) {
+                if (this.board[i][j] !== 1) {
                     vertOne = false;
                 }
-            }
-            if (vert){
-                return(1);
+                if (this.board[i][j] !== 2) {
+                    vertTwo = false;
+                }
             }
 
+            if (vertOne) return 1;
+            if (vertTwo) return 2;
+
+            if (vert) {
+                return (1);
+            }
         }
     }
 }
